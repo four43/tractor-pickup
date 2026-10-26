@@ -7,7 +7,7 @@ npm run bake    # lion-hawk bake: assets/models/*.glb -> baked/
 npm run build   # -> site/exp/tractor-pickup/
 ```
 
-To look at the files without the game, serve `games/tractor-pickup/` (for example `python3 -m http.server 8766`) and open
+To look at the files without the game, serve `exp/tractor-pickup/` (for example `python3 -m http.server 8766`) and open
 `/tools/models.html` (`?m=sheep,duck` shows only those; `?anim=walk` plays an animation on the animals).
 
 ## Rules the code depends on

@@ -43,7 +43,7 @@ docker run --rm -d --name hs-local -p 8080:8080 \
 curl -s localhost:8080/healthz     # ok
 ```
 
-Then, back in `games/tractor-pickup`, build and serve the game:
+Then, back in `exp/tractor-pickup`, build and serve the game:
 
 ```bash
 npm run build -- --out /tmp/tractor
