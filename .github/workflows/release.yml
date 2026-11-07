@@ -1,0 +1,31 @@
+# Push a tag vX.Y.Z (matching package.json) to build the game and attach site.tar.gz to a GitHub Release.
+# four43.com picks a release up by its version in four43/four43 site/_data/games.yml.
+name: Release
+
+on:
+  push:
+    tags: ['v*']
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 26
+          cache: npm
+      - name: Tag matches package.json version
+        run: test "v$(node -p 'require("./package.json").version')" = "$GITHUB_REF_NAME"
+      # build.hooks.js trims and levels the voice and animal clips with ffmpeg
+      - run: sudo apt-get update -q && sudo apt-get install -y -q ffmpeg
+      - run: npm ci
+      - run: npm test
+      - run: npx lion-hawk build --out dist
+      - run: tar -czf site.tar.gz -C dist .
+      - run: gh release create "$GITHUB_REF_NAME" site.tar.gz --title "$GITHUB_REF_NAME" --generate-notes
+        env:
+          GH_TOKEN: ${{ github.token }}

@@ -22,5 +22,5 @@ export default {
     },
     optimise: { meshopt: true, quantize: true, weld: true, prune: true, dedupe: true },
   },
-  build: { out: '../../site/exp/tractor-pickup', entry: 'src/main.js', template: 'template.html', pwa: 'pwa', hooks: './build.hooks.js' },
+  build: { out: 'dist', entry: 'src/main.js', template: 'template.html', pwa: 'pwa', hooks: './build.hooks.js' },
 };
